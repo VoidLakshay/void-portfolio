@@ -1,60 +1,61 @@
 "use client";
 
 import * as THREE from "three";
-import { useLoader, useFrame } from "@react-three/fiber";
+import { useLoader } from "@react-three/fiber";
 import { useEffect, useRef } from "react";
 import { useAppStore } from "@/stores/app.store";
-
+import { gsap } from "gsap";
 
 export function Moon() {
-  const moonRef = useRef<THREE.Mesh>(null!);
+  const moonRef = useRef<THREE.Sprite>(null!);
 
-useFrame((_, delta) => {
-  moonRef.current.rotation.y += delta * 0.08;
-});
   const setMoonLoaded = useAppStore(
     (state) => state.setMoonLoaded
   );
-  
 
-  const colorMap = useLoader(
-    THREE.TextureLoader,
-    "/textures/moon/moon_color.jpg"
-  );
-
-  const displacementMap = useLoader(
-    THREE.TextureLoader,
-    "/textures/moon/moon_displacement.png"
-  );
-
+  const moonTexture = useLoader(
+  THREE.TextureLoader,
+  "/textures/moon/moon.png"
+);
   useEffect(() => {
-    if (colorMap && displacementMap) {
-      setMoonLoaded(true);
-    }
-  }, [colorMap, displacementMap, setMoonLoaded]);
+    moonTexture.colorSpace = THREE.SRGBColorSpace;
+    moonTexture.anisotropy = 16;
 
-  colorMap.colorSpace = THREE.SRGBColorSpace;
+    setMoonLoaded(true);
+  }, [moonTexture, setMoonLoaded]);
 
-  colorMap.anisotropy = 16;
-  displacementMap.anisotropy = 16;
+ useEffect(() => {
+  moonRef.current.position.y = -18;
+
+  gsap.to(moonRef.current.position, {
+   // Option 1 (Meri recommendation)
+// Option 2
+y: -3.6,          // <-- niche stop hoga
+    duration: 5,
+    ease: "power2.out",
+    delay: 0.5,
+  });
+}, []);
 
   return (
-<mesh
+    
+   <sprite
+   
   ref={moonRef}
-  castShadow
-  receiveShadow
+  
+scale={[
+  (moonTexture.image.width / moonTexture.image.height) * 15.2,
+  14.8,
+  1,
+]}
 >
-      <sphereGeometry args={[3, 256, 256]} />
-
-      <meshStandardMaterial
-        map={colorMap}
-        displacementMap={displacementMap}
-        displacementScale={0.05}
-        bumpMap={displacementMap}
-        bumpScale={0.04}
-        roughness={1}
-        metalness={0}
-      />
-    </mesh>
+ <spriteMaterial
+  map={moonTexture}
+  transparent
+  toneMapped={false}
+  color="#d7dde2"
+  opacity={0.93}
+/>
+    </sprite>
   );
 }

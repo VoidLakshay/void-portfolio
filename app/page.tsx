@@ -1,5 +1,5 @@
-import { MoonScene } from "@/components/moon";
+import IntroScene from "@/components/intro/IntroScene";
 
 export default function Home() {
-  return <MoonScene />;
+  return <IntroScene />;
 }
