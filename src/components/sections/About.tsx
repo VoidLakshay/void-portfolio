@@ -81,7 +81,6 @@ export function About() {
           translateX: "-50%",
           translateY: "-50%",
           opacity: isHoveringSection ? 0.2 : 0,
-          filter: "blur(80px)",
         }}
         transition={{ opacity: { duration: 0.3 } }}
       />
@@ -93,13 +92,11 @@ export function About() {
         <motion.div
           className="absolute left-1/2 top-[-200px] -translate-x-1/2 w-[900px] h-[900px] rounded-full"
           style={{
-            backgroundColor: "#2563EB",
-            filter: "blur(240px)",
-            opacity: 0.18,
+            background: "radial-gradient(circle, rgba(37,99,235,0.18) 0%, transparent 70%)",
           }}
           animate={{
             scale: [1, 1.05, 1],
-            opacity: [0.15, 0.22, 0.15],
+            opacity: [0.8, 1, 0.8],
           }}
           transition={{
             duration: 8,
@@ -112,13 +109,11 @@ export function About() {
         <motion.div
           className="absolute left-1/2 top-[-75px] -translate-x-1/2 w-[650px] h-[650px] rounded-full"
           style={{
-            backgroundColor: "#2563EB",
-            filter: "blur(170px)",
-            opacity: 0.30,
+            background: "radial-gradient(circle, rgba(37,99,235,0.30) 0%, transparent 70%)",
           }}
           animate={{
             scale: [1, 1.06, 1],
-            opacity: [0.25, 0.35, 0.25],
+            opacity: [0.8, 1, 0.8],
           }}
           transition={{
             duration: 6,
@@ -131,13 +126,11 @@ export function About() {
         <motion.div
           className="absolute left-1/2 top-[40px] -translate-x-1/2 w-[420px] h-[420px] rounded-full"
           style={{
-            backgroundColor: "#3B82F6",
-            filter: "blur(110px)",
-            opacity: 0.50,
+            background: "radial-gradient(circle, rgba(59,130,246,0.50) 0%, transparent 70%)",
           }}
           animate={{
             scale: [1, 1.07, 1],
-            opacity: [0.45, 0.55, 0.45],
+            opacity: [0.8, 1, 0.8],
           }}
           transition={{
             duration: 5,
@@ -150,13 +143,11 @@ export function About() {
         <motion.div
           className="absolute left-1/2 top-[140px] -translate-x-1/2 w-[220px] h-[220px] rounded-full"
           style={{
-            backgroundColor: "#60A5FA",
-            filter: "blur(60px)",
-            opacity: 0.80,
+            background: "radial-gradient(circle, rgba(96,165,250,0.80) 0%, transparent 70%)",
           }}
           animate={{
             scale: [1, 1.08, 1],
-            opacity: [0.75, 0.85, 0.75],
+            opacity: [0.8, 1, 0.8],
           }}
           transition={{
             duration: 7,

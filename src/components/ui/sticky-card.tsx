@@ -14,6 +14,7 @@ export interface ProjectCardData {
   link: string;
   demoDetails?: string;
   colorClass: string;
+  image?: string;
 }
 
 interface StickyCardProps {
@@ -116,7 +117,7 @@ export const StickyCard002 = ({
               key={card.id}
               onClick={() => window.open(card.link, '_blank')}
               className={cn(
-                "group absolute h-full w-full rounded-3xl p-8 md:p-10 lg:p-12 flex flex-col lg:flex-row gap-8 lg:gap-12 overflow-hidden shadow-2xl border border-white/10 hover:border-white/30 transition-all duration-500 cursor-pointer",
+                "group absolute h-full w-full rounded-3xl p-8 md:p-10 lg:p-12 flex flex-col lg:flex-row gap-8 lg:gap-12 overflow-hidden shadow-2xl border border-white/10 hover:border-white/30 transition-colors duration-500 cursor-pointer will-change-transform",
                 card.colorClass
               )}
               ref={(el) => {
@@ -170,9 +171,9 @@ export const StickyCard002 = ({
                 </div>
               </div>
 
-              {/* Right Side: Live Iframe Preview */}
-              <div className="hidden lg:block relative h-full w-1/2 rounded-2xl overflow-hidden border border-white/20 bg-black shadow-2xl group-hover:scale-[1.02] group-hover:shadow-[0_0_50px_rgba(255,255,255,0.1)] transition-all duration-700">
-                {/* Transparent overlay to intercept clicks and prevent interacting directly with the iframe so the card click works */}
+              {/* Right Side: Live Iframe Preview (Restored & Optimized) */}
+              <div className="hidden lg:block relative h-full w-1/2 rounded-2xl overflow-hidden border border-white/20 bg-black shadow-2xl group-hover:scale-[1.02] group-hover:shadow-[0_0_50px_rgba(255,255,255,0.1)] transition-transform duration-700 will-change-transform">
+                {/* Transparent overlay to intercept clicks */}
                 <div className="absolute inset-0 z-10 bg-transparent" />
                 <iframe 
                   src={card.link}
