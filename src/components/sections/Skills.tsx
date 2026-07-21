@@ -129,7 +129,7 @@ export function Skills() {
       ref={sectionRef}
       onMouseEnter={() => setIsHoveringSection(true)}
       onMouseLeave={() => setIsHoveringSection(false)}
-      className="relative min-h-screen bg-black text-white overflow-hidden flex items-center"
+      className="relative min-h-screen bg-background text-foreground overflow-hidden flex items-center transition-colors duration-300"
     >
       {/* Global Cursor Glow */}
       <motion.div
@@ -156,7 +156,7 @@ export function Skills() {
           className="lg:w-1/2 flex flex-col justify-center relative pointer-events-auto z-20"
         >
           <div className="relative z-20 flex flex-col items-start mb-auto">
-            <h2 className="text-[60px] md:text-[80px] lg:text-[110px] font-black tracking-tighter leading-[0.9] mb-8 text-white uppercase">
+            <h2 className="text-[60px] md:text-[80px] lg:text-[110px] font-black tracking-tighter leading-[0.9] mb-8 text-foreground uppercase">
               Software<br />Skills
             </h2>
             
@@ -254,7 +254,7 @@ export function Skills() {
                           }}
                           whileHover={{ scale: 1.2, x: -15 }}
                           transition={{ type: "spring", stiffness: 300, damping: 15 }}
-                          className="relative flex items-center justify-center w-24 h-24 rounded-[1.5rem] bg-black/40 backdrop-blur-md border border-white/10 shadow-[0_0_20px_rgba(59,130,246,0.15)] hover:shadow-[0_0_40px_rgba(59,130,246,0.6)] hover:border-white/50 hover:bg-white/10 transition-colors duration-300 cursor-grab active:cursor-grabbing group z-10"
+                          className="relative flex items-center justify-center w-24 h-24 rounded-[1.5rem] bg-black/40 backdrop-blur-md border border-foreground/10 shadow-[0_0_20px_rgba(59,130,246,0.15)] hover:shadow-[0_0_40px_rgba(59,130,246,0.6)] hover:border-foreground/50 hover:bg-white/10 transition-colors duration-300 cursor-grab active:cursor-grabbing group z-10"
                           title={skill.name}
                         >
                           <skill.Icon size={48} color={skill.color} className="opacity-80 group-hover:opacity-100 transition-opacity pointer-events-none" />

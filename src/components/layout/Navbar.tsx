@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { Mail } from "lucide-react";
+import { ThemeToggleButton } from "@/components/ui/theme-toggle";
 
 export function Navbar() {
   return (
@@ -25,7 +26,7 @@ export function Navbar() {
       
       <div className="flex items-center">
         <Link 
-          href="mailto:contact@example.com"
+          href="mailto:lakshayvashisth09@gmail.com"
           className="flex items-center gap-2 text-sm font-medium text-white bg-white/10 hover:bg-white/20 px-4 py-2 rounded-full transition-all duration-300"
         >
           <Mail className="w-4 h-4" />

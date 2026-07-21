@@ -44,7 +44,7 @@ export const Projects = () => {
   const introY = useTransform(scrollYProgress, [0, 0.2], [0, -100]);
 
   return (
-    <section id="projects" ref={containerRef} className="relative bg-black w-full overflow-hidden">
+    <section id="projects" ref={containerRef} className="relative bg-background text-foreground w-full overflow-hidden transition-colors duration-300">
       {/* Background ambient glow to blend with About/Skills sections */}
       <div 
         className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-blue-900/20 rounded-full pointer-events-none blur-[150px]"
@@ -65,7 +65,7 @@ export const Projects = () => {
             transition={{ duration: 1.2, ease: "easeOut" }}
             className="text-center"
           >
-            <h2 className="text-[5rem] sm:text-[7rem] md:text-[9rem] lg:text-[12rem] font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white to-white/20 uppercase leading-none drop-shadow-2xl">
+            <h2 className="text-[5rem] sm:text-[7rem] md:text-[9rem] lg:text-[12rem] font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-black to-black/10 dark:from-white dark:to-white/20 uppercase leading-none drop-shadow-2xl">
               Projects
             </h2>
             <motion.div 

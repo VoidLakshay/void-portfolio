@@ -70,7 +70,7 @@ export function About() {
       ref={sectionRef}
       onMouseEnter={() => setIsHoveringSection(true)}
       onMouseLeave={() => setIsHoveringSection(false)}
-      className="relative min-h-screen bg-black text-white overflow-hidden flex items-center"
+      className="relative min-h-screen bg-background text-foreground overflow-hidden flex items-center transition-colors duration-300"
     >
       {/* Global Cursor Glow */}
       <motion.div
@@ -182,7 +182,7 @@ export function About() {
         </motion.div>
 
         {/* Fade Mask (Placed IN FRONT of the bear to hide the sharp bottom edge of the image/coat) */}
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[100vw] h-[200px] bg-gradient-to-t from-black via-black/80 to-transparent z-20 pointer-events-none" />
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[100vw] h-[200px] bg-gradient-to-t from-background via-background/80 to-transparent z-20 pointer-events-none" />
       </div>
 
       <div className="max-w-[1200px] w-full mx-auto flex flex-col lg:flex-row gap-16 lg:gap-24 px-8 py-24 md:py-32 relative z-20 pointer-events-none">
@@ -197,7 +197,7 @@ export function About() {
         >
           {/* Header Text (Top Left) */}
           <div className="relative z-20 flex flex-col items-start -mt-8 md:-mt-16 lg:-mt-12 mb-auto">
-            <span className="text-base text-white font-bold mb-1">
+            <span className="text-base text-foreground font-bold mb-1">
               Hello, I am
             </span>
 
@@ -205,7 +205,7 @@ export function About() {
               Lakshay
             </h2>
 
-            <p className="text-zinc-200 text-sm md:text-base font-medium tracking-wide">
+            <p className="text-zinc-600 dark:text-zinc-200 text-sm md:text-base font-medium tracking-wide">
               Full Stack Software Engineer
             </p>
           </div>
@@ -225,7 +225,7 @@ export function About() {
         >
           {/* About Me */}
           <div className="max-w-[640px]">
-            <h3 className="text-sm font-black tracking-[0.18em] uppercase mb-6 text-white">
+            <h3 className="text-sm font-black tracking-[0.18em] uppercase mb-6 text-foreground">
               About Me
             </h3>
 
@@ -235,18 +235,18 @@ export function About() {
               className="relative cursor-default"
             >
               {/* Base text shown when NOT hovering */}
-              <p className={`font-medium text-[16px] md:text-[17px] lg:text-[18px] leading-[1.9] text-zinc-300 transition-opacity duration-300 ${hoveredId === 'about' ? 'opacity-0' : 'opacity-100'}`}>
+              <p className={`font-medium text-[16px] md:text-[17px] lg:text-[18px] leading-[1.9] text-black/70 dark:text-zinc-300 transition-opacity duration-300 ${hoveredId === 'about' ? 'opacity-0' : 'opacity-100'}`}>
                 {aboutText}
               </p>
 
               {/* Dim Base layer for hover effect */}
-              <p className={`absolute inset-0 font-medium text-[16px] md:text-[17px] lg:text-[18px] leading-[1.9] text-zinc-700 transition-opacity duration-300 ${hoveredId === 'about' ? 'opacity-100' : 'opacity-0'}`}>
+              <p className={`absolute inset-0 font-medium text-[16px] md:text-[17px] lg:text-[18px] leading-[1.9] text-black/30 dark:text-zinc-700 transition-opacity duration-300 ${hoveredId === 'about' ? 'opacity-100' : 'opacity-0'}`}>
                 {aboutText}
               </p>
               
               {/* Bright Layer with Mask (only visible on hover) */}
               <motion.p
-                className={`absolute inset-0 font-medium text-[16px] md:text-[17px] lg:text-[18px] leading-[1.9] text-zinc-100`}
+                className={`absolute inset-0 font-medium text-[16px] md:text-[17px] lg:text-[18px] leading-[1.9] text-black dark:text-zinc-100`}
                 style={{
                   WebkitMaskImage: maskImage,
                   maskImage: maskImage,
@@ -262,7 +262,7 @@ export function About() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-[640px]">
             {/* Education */}
             <div>
-              <h3 className="text-sm font-black tracking-[0.18em] uppercase mb-6 text-white">
+              <h3 className="text-sm font-black tracking-[0.18em] uppercase mb-6 text-foreground">
                 Education
               </h3>
 
@@ -273,26 +273,26 @@ export function About() {
               >
                 {/* Base text shown when NOT hovering */}
                 <div className={`flex flex-col gap-1 transition-opacity duration-300 ${hoveredId === 'education' ? 'opacity-0' : 'opacity-100'}`}>
-                  <span className="text-sm text-zinc-400 font-extrabold mb-1">
+                  <span className="text-sm text-black/60 dark:text-zinc-400 font-extrabold mb-1">
                     2025 – 2028
                   </span>
-                  <span className="text-sm font-medium text-zinc-200">
+                  <span className="text-sm font-medium text-black/80 dark:text-zinc-200">
                     Bachelor of Computer Applications (BCA)
                   </span>
-                  <span className="text-sm text-zinc-500 font-medium">
+                  <span className="text-sm text-black/60 dark:text-zinc-400 font-medium">
                     IITM Murthal
                   </span>
                 </div>
 
                 {/* Dim Base layer for hover effect */}
                 <div className={`absolute inset-0 flex flex-col gap-1 transition-opacity duration-300 ${hoveredId === 'education' ? 'opacity-100' : 'opacity-0'}`}>
-                  <span className="text-sm text-zinc-700 font-extrabold mb-1">
+                  <span className="text-sm text-black/30 dark:text-zinc-700 font-extrabold mb-1">
                     2025 – 2028
                   </span>
-                  <span className="text-sm text-zinc-700 font-medium">
+                  <span className="text-sm text-black/30 dark:text-zinc-700 font-medium">
                     Bachelor of Computer Applications (BCA)
                   </span>
-                  <span className="text-sm text-zinc-700 font-medium">
+                  <span className="text-sm text-black/30 dark:text-zinc-700 font-medium">
                     IITM Murthal
                   </span>
                 </div>
@@ -307,13 +307,13 @@ export function About() {
                   }}
                   transition={{ opacity: { duration: 0.3 } }}
                 >
-                  <span className="text-sm text-zinc-100 font-extrabold mb-1">
+                  <span className="text-sm text-black dark:text-zinc-100 font-extrabold mb-1">
                     2025 – 2028
                   </span>
-                  <span className="text-sm text-zinc-100 font-medium">
+                  <span className="text-sm text-black dark:text-zinc-100 font-medium">
                     Bachelor of Computer Applications (BCA)
                   </span>
-                  <span className="text-sm text-zinc-100 font-medium">
+                  <span className="text-sm text-black dark:text-zinc-100 font-medium">
                     IITM Murthal
                   </span>
                 </motion.div>
@@ -322,7 +322,7 @@ export function About() {
 
             {/* Current Goal */}
             <div>
-              <h3 className="text-sm font-black tracking-[0.18em] uppercase mb-6 text-white">
+              <h3 className="text-sm font-black tracking-[0.18em] uppercase mb-6 text-foreground">
                 Current Goal
               </h3>
 
@@ -332,18 +332,18 @@ export function About() {
                 className="relative cursor-default"
               >
                 {/* Base text shown when NOT hovering */}
-                <p className={`text-zinc-400 text-sm font-medium leading-[1.9] transition-opacity duration-300 ${hoveredId === 'goal' ? 'opacity-0' : 'opacity-100'}`}>
+                <p className={`text-zinc-400 dark:text-zinc-500 dark:text-zinc-400 text-sm font-medium leading-[1.9] transition-opacity duration-300 ${hoveredId === 'goal' ? 'opacity-0' : 'opacity-100'}`}>
                   {goalText}
                 </p>
 
                 {/* Dim Base layer for hover effect */}
-                <p className={`absolute inset-0 text-zinc-700 text-sm font-medium leading-[1.9] transition-opacity duration-300 ${hoveredId === 'goal' ? 'opacity-100' : 'opacity-0'}`}>
+                <p className={`absolute inset-0 text-black/30 dark:text-zinc-700 text-sm font-medium leading-[1.9] transition-opacity duration-300 ${hoveredId === 'goal' ? 'opacity-100' : 'opacity-0'}`}>
                   {goalText}
                 </p>
                 
                 {/* Bright Layer with Mask (only visible on hover) */}
                 <motion.p
-                  className={`absolute inset-0 text-zinc-100 text-sm font-medium leading-[1.9]`}
+                  className={`absolute inset-0 text-black dark:text-zinc-100 text-sm font-medium leading-[1.9]`}
                   style={{
                     WebkitMaskImage: maskImage,
                     maskImage: maskImage,

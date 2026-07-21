@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export function Hero() {
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-black px-4">
+    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-background text-foreground px-4 transition-colors duration-300">
       
       {/* Dynamic Amorphous Blue Glow */}
       <motion.div 
@@ -64,8 +64,8 @@ export function Hero() {
         transition={{ duration: 1, delay: 3 }}
         className="absolute bottom-10 left-10 flex flex-col leading-tight"
       >
-        <span className="text-sm font-bold text-white tracking-wide">Lakshay</span>
-        <span className="text-sm font-bold text-white tracking-wide">Vashisth</span>
+        <span className="text-sm font-bold text-foreground tracking-wide">Lakshay</span>
+        <span className="text-sm font-bold text-foreground tracking-wide">Vashisth</span>
       </motion.div>
 
     </section>
