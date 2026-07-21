@@ -211,8 +211,7 @@ export function Skills() {
         <div className="absolute top-0 left-0 w-0 h-0 flex items-center justify-center scale-50 sm:scale-75 md:scale-90 lg:scale-100 pointer-events-none">
           <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, margin: "1000px" }} // Extremely safe margin so it definitely fades in
+            animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.2, ease: "easeOut" }}
             className="relative w-0 h-0 pointer-events-auto"
           >
