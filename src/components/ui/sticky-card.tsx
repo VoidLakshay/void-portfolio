@@ -50,51 +50,37 @@ export const StickyCard002 = ({
 
       if (!cardElements[0]) return;
 
-      gsap.set(cardElements[0], { y: "0%", scale: 1, rotation: 0 });
+      let mm = gsap.matchMedia();
 
-      for (let i = 1; i < totalCards; i++) {
-        if (!cardElements[i]) continue;
-        gsap.set(cardElements[i], { y: "100%", scale: 1, rotation: 0 });
-      }
+      mm.add("(min-width: 1024px)", () => {
+        gsap.set(cardElements[0], { y: "0%", scale: 1, rotation: 0 });
 
-      const scrollTimeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: ".sticky-cards",
-          start: "top top",
-          end: `+=${window.innerHeight * (totalCards - 1)}`,
-          pin: true,
-          scrub: 0.5,
-          pinSpacing: true,
-        },
+        for (let i = 1; i < totalCards; i++) {
+          if (!cardElements[i]) continue;
+          gsap.set(cardElements[i], { y: "100%", scale: 1, rotation: 0 });
+        }
+
+        const scrollTimeline = gsap.timeline({
+          scrollTrigger: {
+            trigger: ".sticky-cards",
+            start: "top top",
+            end: `+=${window.innerHeight * (totalCards - 1)}`,
+            pin: true,
+            scrub: 0.5,
+            pinSpacing: true,
+          },
+        });
+
+        for (let i = 0; i < totalCards - 1; i++) {
+          const currentCard = cardElements[i];
+          const nextCard = cardElements[i + 1];
+          const position = i;
+          if (!currentCard || !nextCard) continue;
+
+          scrollTimeline.to(currentCard, { scale: 0.9, rotation: 5, duration: 1, ease: "none" }, position);
+          scrollTimeline.to(nextCard, { y: "0%", duration: 1, ease: "none" }, position);
+        }
       });
-
-      for (let i = 0; i < totalCards - 1; i++) {
-        const currentCard = cardElements[i];
-        const nextCard = cardElements[i + 1];
-        const position = i;
-        if (!currentCard || !nextCard) continue;
-
-        scrollTimeline.to(
-          currentCard,
-          {
-            scale: 0.9,
-            rotation: 5,
-            duration: 1,
-            ease: "none",
-          },
-          position,
-        );
-
-        scrollTimeline.to(
-          nextCard,
-          {
-            y: "0%",
-            duration: 1,
-            ease: "none",
-          },
-          position,
-        );
-      }
 
       const resizeObserver = new ResizeObserver(() => {
         ScrollTrigger.refresh();
@@ -106,7 +92,7 @@ export const StickyCard002 = ({
 
       return () => {
         resizeObserver.disconnect();
-        scrollTimeline.kill();
+        mm.revert();
         ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
       };
     },
@@ -115,10 +101,10 @@ export const StickyCard002 = ({
 
   return (
     <div className={cn("relative h-full w-full", className)} ref={container}>
-      <div className="sticky-cards relative flex h-[100vh] w-full items-center justify-center overflow-hidden p-3 lg:p-8">
+      <div className="sticky-cards relative flex flex-col lg:h-[100vh] w-full lg:items-center lg:justify-center p-4 py-12 lg:p-8">
         <div
           className={cn(
-            "relative h-[85vh] w-full max-w-2xl overflow-hidden rounded-3xl md:max-w-4xl lg:max-w-5xl",
+            "relative flex flex-col lg:block gap-6 lg:gap-0 lg:h-[85vh] w-full max-w-2xl rounded-3xl md:max-w-4xl lg:max-w-5xl",
             containerClassName,
           )}
         >
@@ -127,7 +113,7 @@ export const StickyCard002 = ({
               key={card.id}
               onClick={() => window.open(card.link, '_blank')}
               className={cn(
-                "group absolute h-full w-full rounded-3xl p-8 md:p-10 lg:p-12 flex flex-col lg:flex-row gap-8 lg:gap-12 overflow-hidden shadow-2xl border border-white/10 hover:border-white/30 transition-colors duration-500 cursor-pointer will-change-transform",
+                "group sticky top-4 lg:top-0 lg:absolute min-h-[60vh] lg:h-full w-full rounded-3xl p-6 md:p-10 lg:p-12 flex flex-col lg:flex-row gap-8 overflow-hidden shadow-2xl border border-white/10 hover:border-white/30 transition-colors duration-500 cursor-pointer lg:will-change-transform",
                 card.colorClass
               )}
               ref={(el) => {

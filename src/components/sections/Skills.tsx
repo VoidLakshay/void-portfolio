@@ -195,8 +195,8 @@ export function Skills() {
       </div>
 
       {/* Right Side: Massive Rotating Arc (Carousel) */}
-      {/* Placed absolute to the SECTION so the center is on the right edge. On mobile we push it down and scale it down. */}
-      <div className="absolute top-[75%] lg:top-1/2 right-[-20px] sm:right-[-40px] lg:right-0 w-0 h-0 flex items-center justify-center pointer-events-none z-20">
+      {/* Placed absolute on Desktop, but centered at bottom on Mobile */}
+      <div className="absolute bottom-[5%] lg:bottom-auto lg:top-1/2 right-[-20px] sm:right-[-40px] lg:right-0 w-0 h-0 flex items-center justify-center pointer-events-none z-20">
         
         {/* Ambient Blue Background Glow */}
         <motion.div 
