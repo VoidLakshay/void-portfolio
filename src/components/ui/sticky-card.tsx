@@ -3,7 +3,7 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { cn } from "@/lib/cn";
 
 export interface ProjectCardData {
@@ -30,6 +30,16 @@ export const StickyCard002 = ({
 }: StickyCardProps) => {
   const container = useRef(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  const [isDesktop, setIsDesktop] = useState(true);
+
+  useEffect(() => {
+    // Only render iframes on desktop to prevent mobile lag
+    const checkSize = () => setIsDesktop(window.innerWidth >= 1024);
+    checkSize();
+    window.addEventListener('resize', checkSize);
+    return () => window.removeEventListener('resize', checkSize);
+  }, []);
 
   useGSAP(
     () => {
@@ -175,14 +185,16 @@ export const StickyCard002 = ({
               <div className="hidden lg:block relative h-full w-1/2 rounded-2xl overflow-hidden border border-white/20 bg-black shadow-2xl group-hover:scale-[1.02] group-hover:shadow-[0_0_50px_rgba(255,255,255,0.1)] transition-transform duration-700 will-change-transform">
                 {/* Transparent overlay to intercept clicks */}
                 <div className="absolute inset-0 z-10 bg-transparent" />
-                <iframe 
-                  src={card.link}
-                  title={card.title}
-                  className="w-[125%] h-[125%] scale-[0.8] origin-top-left pointer-events-none"
-                  style={{ border: 'none' }}
-                  loading="lazy"
-                  sandbox="allow-scripts allow-same-origin"
-                />
+                {isDesktop && (
+                  <iframe 
+                    src={card.link}
+                    title={card.title}
+                    className="w-[125%] h-[125%] scale-[0.8] origin-top-left pointer-events-none"
+                    style={{ border: 'none' }}
+                    loading="lazy"
+                    sandbox="allow-scripts allow-same-origin"
+                  />
+                )}
               </div>
             </div>
           ))}

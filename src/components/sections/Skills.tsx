@@ -196,7 +196,7 @@ export function Skills() {
 
       {/* Right Side: Massive Rotating Arc (Carousel) */}
       {/* Placed absolute to the SECTION so the center is on the right edge. On mobile we push it down and scale it down. */}
-      <div className="absolute top-[80%] lg:top-1/2 right-[-20px] lg:right-0 w-0 h-0 flex items-center justify-center pointer-events-none z-20">
+      <div className="absolute top-[75%] lg:top-1/2 right-[-20px] sm:right-[-40px] lg:right-0 w-0 h-0 flex items-center justify-center pointer-events-none z-20">
         
         {/* Ambient Blue Background Glow */}
         <motion.div 
@@ -208,7 +208,7 @@ export function Skills() {
         />
 
         {/* Center Anchor */}
-        <div className="absolute top-0 left-0 w-0 h-0 flex items-center justify-center transform scale-[0.45] sm:scale-[0.6] md:scale-75 lg:scale-100 pointer-events-none">
+        <div className="absolute top-0 left-0 w-0 h-0 flex items-center justify-center scale-50 sm:scale-75 md:scale-90 lg:scale-100 pointer-events-none">
           <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
             whileInView={{ opacity: 1, scale: 1 }}
