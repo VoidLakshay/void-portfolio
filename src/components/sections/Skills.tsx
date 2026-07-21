@@ -155,8 +155,8 @@ export function Skills() {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="lg:w-1/2 flex flex-col justify-center relative pointer-events-auto z-20"
         >
-          <div className="relative z-20 flex flex-col items-start mb-auto">
-            <h2 className="text-[60px] md:text-[80px] lg:text-[110px] font-black tracking-tighter leading-[0.9] mb-8 text-foreground uppercase">
+          <div className="relative z-20 flex flex-col items-start mb-auto mt-[-5vh] lg:mt-0">
+            <h2 className="text-[50px] sm:text-[60px] md:text-[80px] lg:text-[110px] font-black tracking-tighter leading-[0.9] mb-6 lg:mb-8 text-foreground uppercase">
               Software<br />Skills
             </h2>
             
@@ -195,8 +195,8 @@ export function Skills() {
       </div>
 
       {/* Right Side: Massive Rotating Arc (Carousel) */}
-      {/* Placed absolute to the SECTION so the center is EXACTLY on the right edge of the screen */}
-      <div className="absolute top-1/2 right-0 w-0 h-0 flex items-center justify-center pointer-events-none z-20">
+      {/* Placed absolute to the SECTION so the center is on the right edge. On mobile we push it down and scale it down. */}
+      <div className="absolute top-[80%] lg:top-1/2 right-[-20px] lg:right-0 w-0 h-0 flex items-center justify-center pointer-events-none z-20">
         
         {/* Ambient Blue Background Glow */}
         <motion.div 
@@ -208,7 +208,7 @@ export function Skills() {
         />
 
         {/* Center Anchor */}
-        <div className="absolute top-0 left-0 w-0 h-0 flex items-center justify-center transform scale-[0.65] sm:scale-[0.8] md:scale-90 lg:scale-100 pointer-events-none">
+        <div className="absolute top-0 left-0 w-0 h-0 flex items-center justify-center transform scale-[0.45] sm:scale-[0.6] md:scale-75 lg:scale-100 pointer-events-none">
           <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -221,6 +221,38 @@ export function Skills() {
               style={{ rotate: rotation }}
               className="relative w-0 h-0"
             >
+              {/* Draggable Center Compass Dial */}
+              <motion.div
+                onPanStart={() => { isDragging.current = true; }}
+                onPan={(e, info) => {
+                  rotation.set(rotation.get() + info.delta.y * 0.5);
+                  velocity.current = info.velocity.y * 0.5;
+                }}
+                onPanEnd={() => { isDragging.current = false; }}
+                whileHover={{ scale: 1.05 }}
+                className="absolute left-1/2 top-1/2 -ml-[160px] -mt-[160px] w-[320px] h-[320px] rounded-full border-[2px] border-zinc-800 bg-black/60 backdrop-blur-xl flex items-center justify-center cursor-grab active:cursor-grabbing z-30 shadow-[0_0_50px_rgba(59,130,246,0.15)] group"
+              >
+                {/* Outer dashed ring */}
+                <div className="absolute inset-4 rounded-full border-[2px] border-dashed border-zinc-700/50 group-hover:border-blue-500/50 transition-colors duration-500" />
+                
+                {/* Inner solid ring */}
+                <div className="absolute inset-10 rounded-full border border-zinc-600/50 flex items-center justify-center bg-zinc-900/40 shadow-inner group-hover:bg-blue-900/10 transition-colors duration-500">
+                  {/* Core glowing dot */}
+                  <div className="w-16 h-16 rounded-full bg-blue-500/10 border border-blue-500/30 flex items-center justify-center shadow-[inset_0_0_20px_rgba(59,130,246,0.3)]">
+                    <div className="w-3 h-3 rounded-full bg-blue-400 shadow-[0_0_15px_rgba(96,165,250,0.8)] group-hover:scale-150 transition-transform duration-500" />
+                  </div>
+                </div>
+
+                {/* Compass markers/ticks */}
+                {Array.from({ length: 12 }).map((_, i) => (
+                  <div 
+                    key={i}
+                    className={`absolute w-1 h-5 rounded-full transition-colors duration-500 ${i % 3 === 0 ? 'bg-blue-500/80 h-6 w-1.5' : 'bg-zinc-700'}`}
+                    style={{ transform: `rotate(${i * 30}deg) translateY(-140px)` }}
+                  />
+                ))}
+              </motion.div>
+
               {ICONS.map((skill, index) => {
                 const angle = index * ANGLE_STEP;
                 
