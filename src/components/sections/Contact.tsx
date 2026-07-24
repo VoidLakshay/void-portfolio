@@ -13,11 +13,12 @@ export const Contact = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const form = e.currentTarget;
     setIsSubmitting(true);
     setButtonText("Sending...");
     setStatus({ type: null, message: "" });
 
-    const formData = new FormData(e.currentTarget);
+    const formData = new FormData(form);
     const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_KEY || "3e9abf9b-30a1-41a0-8f98-83b4090fd902";
     formData.append("access_key", accessKey);
 
@@ -39,7 +40,7 @@ export const Contact = () => {
       if (data.success) {
         setButtonText("Sent Successfully!");
         setStatus({ type: "success", message: "Thank you for reaching out! I'll get back to you soon." });
-        e.currentTarget.reset();
+        form.reset();
         
         setTimeout(() => {
           setButtonText("Send Message");
