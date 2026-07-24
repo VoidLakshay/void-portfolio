@@ -124,26 +124,26 @@ export function Skills() {
           filter: "blur(80px)",
         }}
         transition={{ opacity: { duration: 0.3 } }}
-      />      <div className="max-w-[1200px] w-full mx-auto flex flex-col lg:flex-row gap-16 lg:gap-24 px-8 py-24 md:py-32 relative z-20 pointer-events-none">
+      />      <div className="max-w-[1200px] w-full mx-auto flex flex-col items-center gap-16 lg:gap-24 px-8 py-24 md:py-32 relative z-20 pointer-events-none">
         
-        {/* Left Side: Typography */}
+        {/* Top Side: Typography */}
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="lg:w-1/2 flex flex-col justify-center relative pointer-events-auto z-20"
+          className="w-full flex flex-col items-center text-center relative pointer-events-auto z-20"
         >
-          <div className="relative z-20 flex flex-col items-start mb-auto mt-[-5vh] lg:mt-0">
-            <h2 className="text-[50px] sm:text-[60px] md:text-[80px] lg:text-[110px] font-black tracking-tighter leading-[0.9] mb-6 lg:mb-8 text-foreground uppercase">
-              Software<br />Skills
+          <div className="relative z-20 flex flex-col items-center mt-[-5vh] lg:mt-0">
+            <h2 className="text-[50px] sm:text-[60px] md:text-[80px] lg:text-[110px] font-black tracking-tighter leading-[0.9] mb-6 lg:mb-8 text-foreground uppercase text-center">
+              Software Skills
             </h2>
             
             <div 
               onMouseEnter={handleTextMouseEnter}
               onMouseMove={handleTextMouseMove}
               onMouseLeave={handleTextMouseLeave}
-              className="relative cursor-default max-w-[550px]"
+              className="relative cursor-default max-w-[800px] mx-auto text-center"
             >
               {/* Base text shown when NOT hovering */}
               <p className={`text-[16px] md:text-[18px] font-medium leading-[1.9] text-zinc-400 transition-opacity duration-300 ${isHoveringText ? 'opacity-0' : 'opacity-100'}`}>
@@ -171,18 +171,18 @@ export function Skills() {
           </div>
         </motion.div>
 
-        {/* Right Side: Floating Skills Grid */}
-        <div className="lg:w-1/2 flex items-center justify-center relative z-20 mt-12 lg:mt-0 pointer-events-auto">
+        {/* Bottom Side: Floating Skills Grid */}
+        <div className="w-full flex items-center justify-center relative z-20 mt-4 pointer-events-auto">
           {/* Ambient Blue Background Glow */}
           <motion.div 
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true, margin: "500px" }}
             transition={{ duration: 1.5, delay: 0.3 }}
-            className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 w-[300px] lg:w-[500px] aspect-square bg-blue-600/20 rounded-full blur-[100px] lg:blur-[140px] pointer-events-none"
+            className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 w-[300px] lg:w-[800px] aspect-[2/1] bg-blue-600/20 rounded-full blur-[100px] lg:blur-[140px] pointer-events-none"
           />
 
-          <div className="flex flex-wrap justify-center gap-6 sm:gap-8 lg:gap-10 max-w-[600px] relative z-10">
+          <div className="flex flex-wrap justify-center gap-6 sm:gap-8 lg:gap-10 max-w-[1000px] relative z-10">
             {ICONS.map((skill, index) => {
               return (
                 <motion.div
