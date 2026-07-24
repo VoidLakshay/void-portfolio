@@ -1,10 +1,56 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { FaGithub, FaLinkedin, FaEnvelope, FaInstagram, FaXTwitter, FaDiscord } from "react-icons/fa6";
 
 export const Contact = () => {
+  const [buttonText, setButtonText] = useState("Send Message");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [status, setStatus] = useState<{ type: "success" | "error" | null; message: string }>({ type: null, message: "" });
+  
   const currentYear = new Date().getFullYear();
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setButtonText("Sending...");
+    setStatus({ type: null, message: "" });
+
+    const formData = new FormData(e.currentTarget);
+    // Note: The user needs to provide their Web3Forms access key
+    const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_KEY || "YOUR_ACCESS_KEY_HERE";
+    formData.append("access_key", accessKey);
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setButtonText("Sent Successfully!");
+        setStatus({ type: "success", message: "Thank you for reaching out! I'll get back to you soon." });
+        e.currentTarget.reset();
+        
+        setTimeout(() => {
+          setButtonText("Send Message");
+          setStatus({ type: null, message: "" });
+        }, 5000);
+      } else {
+        setButtonText("Send Message");
+        setStatus({ type: "error", message: data.message || "Something went wrong. Please try again." });
+      }
+    } catch (error) {
+      console.error(error);
+      setButtonText("Send Message");
+      setStatus({ type: "error", message: "Network error occurred. Please try again later." });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <section id="contact" className="relative bg-background text-foreground w-full min-h-screen flex flex-col justify-between pt-24 px-4 overflow-hidden transition-colors duration-300">
@@ -28,31 +74,45 @@ export const Contact = () => {
             </p>
           </div>
 
-          <form className="flex flex-col gap-4">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
             <input
               type="text"
+              name="name"
               placeholder="Your Name"
               className="w-full bg-zinc-100 dark:bg-zinc-900/50 border border-zinc-200 dark:border-white/5 rounded-xl px-6 py-4 text-foreground placeholder:text-zinc-500 focus:outline-none focus:ring-1 focus:ring-black/10 dark:focus:ring-white/20 focus:border-black/20 dark:focus:border-white/20 transition-all"
               required
+              disabled={isSubmitting}
             />
             <input
               type="email"
+              name="email"
               placeholder="your@email.com"
               className="w-full bg-zinc-100 dark:bg-zinc-900/50 border border-zinc-200 dark:border-white/5 rounded-xl px-6 py-4 text-foreground placeholder:text-zinc-500 focus:outline-none focus:ring-1 focus:ring-black/10 dark:focus:ring-white/20 focus:border-black/20 dark:focus:border-white/20 transition-all"
               required
+              disabled={isSubmitting}
             />
             <textarea
+              name="message"
               placeholder="Tell me about your project or question..."
               rows={5}
               className="w-full bg-zinc-100 dark:bg-zinc-900/50 border border-zinc-200 dark:border-white/5 rounded-xl px-6 py-4 text-foreground placeholder:text-zinc-500 focus:outline-none focus:ring-1 focus:ring-black/10 dark:focus:ring-white/20 focus:border-black/20 dark:focus:border-white/20 transition-all resize-none"
               required
+              disabled={isSubmitting}
             />
+            
+            {status.message && (
+              <div className={`px-4 py-3 rounded-xl text-sm font-medium ${status.type === 'success' ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400' : 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400'}`}>
+                {status.message}
+              </div>
+            )}
+
             <div className="flex flex-col sm:flex-row gap-4 mt-2">
               <button
                 type="submit"
-                className="flex-1 bg-foreground text-background font-semibold rounded-xl px-6 py-4 hover:opacity-80 transition-colors duration-300"
+                disabled={isSubmitting}
+                className="flex-1 bg-foreground text-background font-semibold rounded-xl px-6 py-4 hover:opacity-80 transition-opacity duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Send Message
+                {buttonText}
               </button>
               <a
                 href="https://drive.google.com/file/d/15QvL9a8kHvcbzpeqPGqdUN2WyIYeRQ1n/view?usp=drivesdk"
