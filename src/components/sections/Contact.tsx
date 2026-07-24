@@ -18,14 +18,20 @@ export const Contact = () => {
     setStatus({ type: null, message: "" });
 
     const formData = new FormData(e.currentTarget);
-    // Note: The user needs to provide their Web3Forms access key
     const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_KEY || "3e9abf9b-30a1-41a0-8f98-83b4090fd902";
     formData.append("access_key", accessKey);
+
+    const object = Object.fromEntries(formData);
+    const json = JSON.stringify(object);
 
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        body: formData,
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        },
+        body: json,
       });
 
       const data = await response.json();
