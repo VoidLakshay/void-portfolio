@@ -81,7 +81,12 @@ export const HeroProfile = ({ avatarUrl, name, videoUrl }: HeroProfileProps) => 
           </div>
 
           <div className="flex flex-col items-center sm:items-end gap-4 sm:mt-6 md:mt-10">
-            <button className="group relative flex items-center gap-2 px-4 py-2 rounded-md cursor-pointer bg-foreground/5 overflow-hidden transition-all duration-300 hover:bg-green-500/10 border border-transparent hover:border-green-500/30">
+            <a 
+              href="https://wa.me/919499333091?text=Hi%20Lakshay,%20I'm%20interested%20in%20working%20with%20you!" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="group relative flex items-center gap-2 px-4 py-2 rounded-md cursor-pointer bg-foreground/5 overflow-hidden transition-all duration-300 hover:bg-green-500/10 border border-transparent hover:border-green-500/30"
+            >
               <span className="relative flex h-2 w-2">
                 <span className="absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75 animate-ping"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
@@ -89,7 +94,7 @@ export const HeroProfile = ({ avatarUrl, name, videoUrl }: HeroProfileProps) => 
               <span className="text-foreground text-sm font-medium transition-all duration-300 group-hover:text-green-400">
                 Hire Me Now
               </span>
-            </button>
+            </a>
             <div className="flex gap-4">
               <a href="https://www.instagram.com/voidlakshay/" target="_blank" rel="noopener noreferrer" className="text-foreground/40 hover:text-foreground transition-colors">
                 <FaInstagram size={20} />
