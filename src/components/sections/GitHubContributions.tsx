@@ -21,7 +21,6 @@ export const GitHubContributions = ({ username }: GitHubContributionsProps) => {
               dark: ['#1f1f22', '#004a43', '#007a6e', '#00b3a3', '#00ebd5'],
             }}
             style={{ width: '100%' }}
-            hideColorLegend
           />
         </div>
       </div>
