@@ -100,10 +100,10 @@ export const HeroProfile = ({ avatarUrl, name, videoUrl }: HeroProfileProps) => 
               <a href="https://discord.com/users/1248901938993565696" target="_blank" rel="noopener noreferrer" className="text-foreground/40 hover:text-foreground transition-colors">
                 <FaDiscord size={20} />
               </a>
-              <a href="#" target="_blank" rel="noopener noreferrer" className="text-foreground/40 hover:text-foreground transition-colors">
+              <a href="https://x.com/voidlakshay" target="_blank" rel="noopener noreferrer" className="text-foreground/40 hover:text-foreground transition-colors">
                 <FaXTwitter size={20} />
               </a>
-              <a href="#" target="_blank" rel="noopener noreferrer" className="text-foreground/40 hover:text-foreground transition-colors">
+              <a href="https://www.linkedin.com/in/lakshayvashisth" target="_blank" rel="noopener noreferrer" className="text-foreground/40 hover:text-foreground transition-colors">
                 <FaLinkedin size={20} />
               </a>
             </div>
