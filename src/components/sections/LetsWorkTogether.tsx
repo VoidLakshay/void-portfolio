@@ -51,7 +51,7 @@ export const LetsWorkTogether = () => {
                   animate={{ y: 0, opacity: 1, rotateX: 0 }}
                   exit={{ y: 50, opacity: 0, rotateX: -60 }}
                   transition={{ duration: 0.8, type: "spring", bounce: 0.3 }}
-                  className="absolute text-4xl sm:text-5xl md:text-6xl text-white text-center drop-shadow-lg font-handwritten tracking-wide w-full px-4"
+                  className="absolute text-2xl sm:text-4xl md:text-5xl text-white text-center drop-shadow-lg font-handwritten tracking-wide w-full px-4 leading-tight"
                   style={{ transformOrigin: "center center" }}
                 >
                   {phrases[index]}

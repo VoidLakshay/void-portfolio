@@ -87,9 +87,15 @@ const ProjectCarousel = ({
   .ProjectCarousel .swiper-slide {
     width: 85vw;
     max-width: 600px;
-    aspect-ratio: 16/9;
+    aspect-ratio: 1/1;
     border-radius: 16px;
     overflow: hidden;
+  }
+  
+  @media (min-width: 640px) {
+    .ProjectCarousel .swiper-slide {
+      aspect-ratio: 16/9;
+    }
   }
 
   .swiper-pagination-bullet {
