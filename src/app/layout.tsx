@@ -28,7 +28,6 @@ export const metadata: Metadata = {
 import { ScrollProgress } from '@/components/ui/scroll-progress';
 import { ThemeProvider } from 'next-themes';
 import { Navbar } from '@/components/layout/Navbar';
-import { ThemeToggleButton } from '@/components/ui/theme-toggle';
 
 export default function RootLayout({
   children,
@@ -39,7 +38,6 @@ export default function RootLayout({
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`} suppressHydrationWarning>
       <body>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
-          <ThemeToggleButton className="fixed top-6 right-6 z-[100]" />
           <SmoothScroll>
             {children}
           </SmoothScroll>

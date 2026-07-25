@@ -1,87 +1,207 @@
 "use client";
 
-import { StickyCard002 } from "@/components/ui/sticky-card";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import React from 'react';
+import { motion } from "framer-motion";
+import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
+import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
+import {
+  Autoplay,
+  EffectCoverflow,
+  Navigation,
+  Pagination,
+} from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
 
-const defaultCards = [
+import "swiper/css";
+import "swiper/css/effect-coverflow";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+
+import { cn } from "@/lib/cn";
+
+const projectsData = [
   {
-    id: 1,
-    title: "PlayTube",
-    description: "Built a production-style YouTube-inspired video streaming platform with authentication, channels, playlists, likes, comments, watch history and chat. Implemented asynchronous video processing using RabbitMQ background workers, and integrated FFmpeg to transcode uploaded videos into adaptive HLS streams.",
-    techStack: ["React", "TypeScript", "Redux Toolkit", "Tailwind CSS", "Node.js", "Express.js", "Prisma ORM", "PostgreSQL", "RabbitMQ", "FFmpeg", "AWS S3"],
-    link: "https://playtube-tau.vercel.app/",
-    colorClass: "bg-gradient-to-br from-red-950 via-neutral-900 to-black"
-  },
-  {
-    id: 2,
     title: "Spotify Clone",
-    description: "Developed a Spotify-inspired full-stack music streaming application with a primary focus on real-time chat capabilities. Includes JWT authentication, playlist management, seamless music playback, and an admin dashboard for efficient content management.",
-    techStack: ["React", "TypeScript", "Tailwind CSS", "Node.js", "Express.js", "MongoDB", "Socket.io", "Zustand", "JWT", "Cloudinary"],
-    link: "https://spotify-clonee-ten.vercel.app/",
-    colorClass: "bg-gradient-to-br from-emerald-950 via-neutral-900 to-black"
+    description: "Full-stack music app featuring real-time friend activity, live chat system, active user status, and seamless playback.",
+    image: "https://res.cloudinary.com/dgzd6pzm7/image/upload/v1784991508/5edb765f-fdf3-4c44-9ad8-c0392f772cd6_zjmgv4.jpg",
+    tech: ["MERN", "Socket.io", "Zustand", "Clerk Auth"],
+    github: "https://github.com/VoidLakshay/spotify-clonee",
+    live: "https://spotify-clonee-ten.vercel.app/"
   },
   {
-    id: 3,
-    title: "Employee Management System",
-    description: "Developed a role-based Employee Management System with separate Admin and Employee dashboards. Implemented authentication flow, responsive UI, and reusable React components to manage and display employee-related information efficiently.",
-    techStack: ["React", "Tailwind CSS", "JavaScript"],
-    link: "https://voidlakshay.github.io/EMS/",
-    demoDetails: "Demo: admin@company.com/123 | emp1@company.com/123",
-    colorClass: "bg-gradient-to-br from-blue-950 via-neutral-900 to-black"
+    title: "Playtube",
+    description: "YouTube-inspired platform featuring RabbitMQ background workers for async video processing, FFmpeg HLS transcoding, and AWS S3 storage.",
+    image: "https://res.cloudinary.com/dgzd6pzm7/image/upload/v1784991130/WhatsApp_Image_2026-07-25_at_8.21.40_PM_kggw3f.jpg",
+    tech: ["React", "Node.js", "PostgreSQL", "RabbitMQ", "AWS S3"],
+    github: "https://github.com/VoidLakshay/playtube",
+    live: "https://playtube-tau.vercel.app/"
+  },
+  {
+    title: "EMS (React)",
+    description: "Admin/Employee dashboards, role-based login, and responsive UI built purely with React. (Demo: admin@company.com/123, emp1@company.com/123)",
+    image: "https://res.cloudinary.com/dgzd6pzm7/image/upload/v1784992023/WhatsApp_Image_2026-07-25_at_8.36.30_PM_hqq6u7.jpg",
+    tech: ["React", "TailwindCSS", "Vite"],
+    github: "https://github.com/VoidLakshay/EMS",
+    live: "https://voidlakshay.github.io/EMS/"
   }
 ];
 
 export const Projects = () => {
-  const containerRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"]
-  });
-
-  const introOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
-  const introScale = useTransform(scrollYProgress, [0, 0.2], [1, 1.2]);
-  const introY = useTransform(scrollYProgress, [0, 0.2], [0, -100]);
+  // Duplicate the array so Swiper's loop works perfectly even with only 3 unique items
+  const loopedProjects = [...projectsData, ...projectsData];
 
   return (
-    <section id="projects" ref={containerRef} className="relative bg-background text-foreground w-full overflow-hidden transition-colors duration-300">
-      {/* Background ambient glow to blend with About/Skills sections */}
-      <div 
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-blue-900/20 rounded-full pointer-events-none blur-[150px]"
-      />
-      <div 
-        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-blue-900/10 rounded-full pointer-events-none blur-[120px]"
-      />
+    <div className="w-full h-fit flex flex-col items-start justify-center gap-6 py-2">
+      <h2 className="text-xl font-semibold text-foreground px-2 sm:px-4 md:px-10 tracking-tight">Featured Projects</h2>
+      <div className="w-full flex justify-center items-center">
+        <ProjectCarousel projects={loopedProjects} showPagination loop />
+      </div>
+    </div>
+  );
+};
 
-      {/* Creative Centered Intro (Sticky until cards reach it) */}
-      <div className="h-[150vh] w-full">
-        <motion.div 
-          className="sticky top-0 h-screen w-full flex flex-col items-center justify-center px-4"
-          style={{ opacity: introOpacity, scale: introScale, y: introY }}
-        >
-          <motion.div
-            initial={{ opacity: 0, y: 50, filter: "blur(10px)" }}
-            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            transition={{ duration: 1.2, ease: "easeOut" }}
-            className="text-center"
+const ProjectCarousel = ({
+  projects,
+  className,
+  showPagination = false,
+  showNavigation = true,
+  loop = true,
+  autoplay = true,
+  spaceBetween = 0,
+}: {
+  projects: typeof projectsData;
+  className?: string;
+  showPagination?: boolean;
+  showNavigation?: boolean;
+  loop?: boolean;
+  autoplay?: boolean;
+  spaceBetween?: number;
+}) => {
+  const css = `
+  .ProjectCarousel {
+    width: 100%;
+    padding-top: 40px;
+    padding-bottom: 30px !important;
+  }
+  
+  .ProjectCarousel .swiper-slide {
+    width: 85vw;
+    max-width: 600px;
+    aspect-ratio: 16/9;
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .swiper-pagination-bullet {
+    background-color: rgba(255, 255, 255, 0.5) !important;
+  }
+  
+  .swiper-pagination-bullet-active {
+    background-color: #fff !important;
+  }
+  `;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, translateY: 20 }}
+      animate={{ opacity: 1, translateY: 0 }}
+      transition={{ duration: 0.3, delay: 0.2 }}
+      className={cn("relative w-full max-w-6xl px-0 sm:px-2", className)}
+    >
+      <style>{css}</style>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 1836 1053"
+        className="absolute w-0 h-0 pointer-events-none"
+      >
+        <clipPath id="customMaskProjects" clipPathUnits="objectBoundingBox">
+          <path
+            fill="currentColor"
+            d="M457.525 1.148c-20.789-3.198-193.979 1.16-283.854 2.496 11.104-.178 1.297-2.868-81.146-2.496-103.5.468-86 102.499-86 109.999s-7 524.5-6.5 547.5 10 59 6.5 99c-2.8 32-1.167 234.667 0 332.003.5 75 62.5 66.5 67 68.5s38.5 0 81.5 0 436 6 526 10.5 438.995-.5 505.495 0 330.01-12.5 417.51-12.5 230.99 2 270.99 0 40.5-16 51-31.5 12.5-61 12.5-105.5c0-44.503 7.01-274.504 7.01-348.004s-3.51-159.998-7.01-230.998 0-256.002 0-318.002 7.01-92.998-22.5-110.999c-18.79-11.471-81.99-9.999-133.49-9.999H853.525c-29 0-370 4-396 0Z"
+            transform="scale(0.0005139987561, 0.0008543065594)"
+          ></path>
+        </clipPath>
+      </svg>
+      <Swiper
+        spaceBetween={spaceBetween}
+        autoplay={autoplay ? { delay: 3000, disableOnInteraction: true } : false}
+        effect="coverflow"
+        grabCursor={true}
+        slidesPerView="auto"
+        centeredSlides={true}
+        loop={loop}
+        coverflowEffect={{
+          rotate: 40,
+          stretch: 0,
+          depth: 100,
+          modifier: 1,
+          slideShadows: true,
+        }}
+        pagination={showPagination ? { clickable: true } : false}
+        navigation={
+          showNavigation
+            ? { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" }
+            : false
+        }
+        className="ProjectCarousel"
+        modules={[EffectCoverflow, Autoplay, Pagination, Navigation]}
+      >
+        {projects.map((project, index) => (
+          <SwiperSlide 
+            key={index} 
+            className="shadow-2xl bg-black group"
+            style={{ clipPath: "url(#customMaskProjects)" }}
           >
-            <h2 className="text-[5rem] sm:text-[7rem] md:text-[9rem] lg:text-[12rem] font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-black to-black/10 dark:from-white dark:to-white/20 uppercase leading-none drop-shadow-2xl">
-              Projects
-            </h2>
-            <motion.div 
-              initial={{ scaleX: 0, opacity: 0 }}
-              whileInView={{ scaleX: 1, opacity: 0.5 }}
-              transition={{ duration: 1.5, delay: 0.5, ease: "circOut" }}
-              className="h-1 bg-gradient-to-r from-transparent via-blue-500 to-transparent w-full mt-4" 
+            {/* Image container using object-contain to prevent cropping */}
+            <img
+              className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+              src={project.image}
+              alt={project.title}
             />
-          </motion.div>
-        </motion.div>
-      </div>
-      
-      {/* The component handles its own height and padding for the sticky effect */}
-      <div className="relative z-10 h-full w-full pb-24 -mt-[50vh]">
-        <StickyCard002 cards={defaultCards} />
-      </div>
-    </section>
+            
+            {/* Gradient Overlay for Text */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent opacity-90 transition-opacity duration-300"></div>
+            
+            {/* Text Content */}
+            <div className="absolute bottom-0 left-0 w-full p-6 sm:p-10 flex flex-col gap-3 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+              <h3 className="text-2xl sm:text-4xl font-bold font-mono text-white drop-shadow-lg">{project.title}</h3>
+              <p className="text-sm sm:text-base text-white/80 leading-relaxed max-w-3xl drop-shadow-md font-mono">
+                {project.description}
+              </p>
+              
+              <div className="flex flex-wrap gap-2 pt-2">
+                {project.tech.map((tech, i) => (
+                  <span key={i} className="text-[10px] sm:text-xs px-3 py-1.5 bg-white/10 backdrop-blur-md border border-white/20 rounded-md text-white font-mono">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Hover Actions (GitHub / Live) */}
+            <div className="absolute top-0 right-0 p-6 flex gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <a href={project.github} target="_blank" rel="noopener noreferrer" className="p-4 bg-black/50 border border-white/10 rounded-full hover:bg-white/20 backdrop-blur-md text-white transition-colors">
+                <FaGithub size={24} />
+              </a>
+              <a href={project.live} target="_blank" rel="noopener noreferrer" className="p-4 bg-black/50 border border-white/10 rounded-full hover:bg-white/20 backdrop-blur-md text-white transition-colors">
+                <FaExternalLinkAlt size={22} />
+              </a>
+            </div>
+          </SwiperSlide>
+        ))}
+        
+        {showNavigation && (
+          <>
+            <div className="swiper-button-next after:hidden !right-4 sm:!right-10 !text-white/50 hover:!text-white transition-colors">
+              <ChevronRightIcon className="h-10 w-10 sm:h-12 sm:w-12 drop-shadow-lg" />
+            </div>
+            <div className="swiper-button-prev after:hidden !left-4 sm:!left-10 !text-white/50 hover:!text-white transition-colors">
+              <ChevronLeftIcon className="h-10 w-10 sm:h-12 sm:w-12 drop-shadow-lg" />
+            </div>
+          </>
+        )}
+      </Swiper>
+    </motion.div>
   );
 };
