@@ -36,7 +36,7 @@ const projectsData: ProjectItem[] = [
     image: "https://res.cloudinary.com/dgzd6pzm7/image/upload/v1791700320/Screenshot_2026-10-11_115619_fhwv1u.png",
     tech: ["React", "TypeScript", "Tailwind CSS", "Framer Motion", "Vite"],
     github: "https://github.com/sikshasankalp/Sikshasankalp",
-    live: "https://sikshasankalp.vercel.app/",
+    live: "https://www.sikshasankalp.com/",
     stats: "30k+ monthly visitors"
   },
   {
