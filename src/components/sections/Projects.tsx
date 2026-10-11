@@ -175,9 +175,18 @@ const ProjectCarousel = ({
         {projects.map((project, index) => (
           <SwiperSlide 
             key={index} 
-            className="shadow-2xl bg-black group"
+            className="shadow-2xl bg-black group relative cursor-pointer"
             style={{ clipPath: "url(#customMaskProjects)" }}
           >
+            {/* Full-card link for mobile & desktop clicks */}
+            <a
+              href={project.live}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="absolute inset-0 z-10"
+              aria-label={`Open ${project.title}`}
+            />
+
             {/* Image container using object-contain to prevent cropping */}
             <img
               className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
@@ -186,12 +195,15 @@ const ProjectCarousel = ({
             />
             
             {/* Gradient Overlay for Text */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/75 to-transparent/20 opacity-90 transition-opacity duration-300"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/75 to-transparent/20 opacity-90 transition-opacity duration-300 pointer-events-none"></div>
             
             {/* Text Content */}
-            <div className="absolute bottom-0 left-0 w-full p-4 sm:p-6 md:p-8 flex flex-col gap-2 sm:gap-2.5 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+            <div className="absolute bottom-0 left-0 w-full p-4 sm:p-6 md:p-8 flex flex-col gap-2 sm:gap-2.5 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300 pointer-events-none z-10">
               <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-                <h3 className="text-xl sm:text-2xl md:text-3xl font-bold font-mono text-white drop-shadow-lg">{project.title}</h3>
+                <h3 className="text-xl sm:text-2xl md:text-3xl font-bold font-mono text-white drop-shadow-lg flex items-center gap-2">
+                  {project.title}
+                  <FaExternalLinkAlt className="inline-block sm:hidden w-3 h-3 text-white/60" />
+                </h3>
                 {project.stats && (
                   <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-mono font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 backdrop-blur-md shadow-[0_0_12px_rgba(16,185,129,0.25)]">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
@@ -212,13 +224,27 @@ const ProjectCarousel = ({
               </div>
             </div>
 
-            {/* Hover Actions (GitHub / Live) */}
-            <div className="absolute top-0 right-0 p-6 flex gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <a href={project.github} target="_blank" rel="noopener noreferrer" className="p-4 bg-black/50 border border-white/10 rounded-full hover:bg-white/20 backdrop-blur-md text-white transition-colors">
-                <FaGithub size={24} />
+            {/* Actions (GitHub / Live) - z-20 so it sits above full-card link */}
+            <div className="absolute top-0 right-0 p-4 sm:p-6 flex gap-2.5 sm:gap-4 z-20 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-300">
+              <a 
+                href={project.github} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                onClick={(e) => e.stopPropagation()}
+                aria-label={`GitHub source code for ${project.title}`}
+                className="p-2.5 sm:p-4 bg-black/60 border border-white/15 rounded-full hover:bg-white/20 backdrop-blur-md text-white transition-all shadow-lg hover:scale-105"
+              >
+                <FaGithub className="w-4 h-4 sm:w-6 sm:h-6" />
               </a>
-              <a href={project.live} target="_blank" rel="noopener noreferrer" className="p-4 bg-black/50 border border-white/10 rounded-full hover:bg-white/20 backdrop-blur-md text-white transition-colors">
-                <FaExternalLinkAlt size={22} />
+              <a 
+                href={project.live} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                onClick={(e) => e.stopPropagation()}
+                aria-label={`Live site for ${project.title}`}
+                className="p-2.5 sm:p-4 bg-black/60 border border-white/15 rounded-full hover:bg-white/20 backdrop-blur-md text-white transition-all shadow-lg hover:scale-105"
+              >
+                <FaExternalLinkAlt className="w-3.5 h-3.5 sm:w-5 sm:h-5" />
               </a>
             </div>
           </SwiperSlide>
