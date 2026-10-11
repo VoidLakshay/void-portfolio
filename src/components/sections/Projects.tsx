@@ -37,7 +37,7 @@ const projectsData: ProjectItem[] = [
     tech: ["React", "TypeScript", "Tailwind CSS", "Framer Motion", "Vite"],
     github: "https://github.com/sikshasankalp/Sikshasankalp",
     live: "https://sikshasankalp.vercel.app/",
-    stats: "30k+ Monthly Visitors"
+    stats: "30k+ visitors"
   },
   {
     title: "Spotify Clone",
@@ -205,8 +205,7 @@ const ProjectCarousel = ({
                   <FaExternalLinkAlt className="inline-block sm:hidden w-3 h-3 text-white/60" />
                 </h3>
                 {project.stats && (
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-mono font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 backdrop-blur-md shadow-[0_0_12px_rgba(16,185,129,0.25)]">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  <span className="text-[10px] sm:text-xs text-white/60 font-mono bg-white/5 border border-white/10 px-2 py-0.5 rounded-md backdrop-blur-sm">
                     {project.stats}
                   </span>
                 )}
