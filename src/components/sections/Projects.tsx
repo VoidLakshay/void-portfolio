@@ -19,7 +19,26 @@ import "swiper/css/navigation";
 
 import { cn } from "@/lib/cn";
 
-const projectsData = [
+interface ProjectItem {
+  title: string;
+  description: string;
+  image: string;
+  tech: string[];
+  github: string;
+  live: string;
+  stats?: string;
+}
+
+const projectsData: ProjectItem[] = [
+  {
+    title: "Siksha Sankalp",
+    description: "Production NGO web platform empowering underprivileged children ('Footpath Se School Tak'). Scaled to handle 30k+ monthly visitors with interactive donation, dynamic storytelling, and transparency workflows.",
+    image: "https://res.cloudinary.com/dgzd6pzm7/image/upload/v1791700320/Screenshot_2026-10-11_115619_fhwv1u.png",
+    tech: ["React", "TypeScript", "Tailwind CSS", "Framer Motion", "Vite"],
+    github: "https://github.com/sikshasankalp/Sikshasankalp",
+    live: "https://sikshasankalp.vercel.app/",
+    stats: "30k+ Monthly Visitors"
+  },
   {
     title: "Spotify Clone",
     description: "Full-stack music app featuring real-time friend activity, live chat system, active user status, and seamless playback.",
@@ -69,7 +88,7 @@ const ProjectCarousel = ({
   autoplay = true,
   spaceBetween = 0,
 }: {
-  projects: typeof projectsData;
+  projects: ProjectItem[];
   className?: string;
   showPagination?: boolean;
   showNavigation?: boolean;
@@ -171,7 +190,15 @@ const ProjectCarousel = ({
             
             {/* Text Content */}
             <div className="absolute bottom-0 left-0 w-full p-6 sm:p-10 flex flex-col gap-3 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-              <h3 className="text-2xl sm:text-4xl font-bold font-mono text-white drop-shadow-lg">{project.title}</h3>
+              <div className="flex flex-wrap items-center gap-3">
+                <h3 className="text-2xl sm:text-4xl font-bold font-mono text-white drop-shadow-lg">{project.title}</h3>
+                {project.stats && (
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] sm:text-xs font-mono font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 backdrop-blur-md shadow-[0_0_12px_rgba(16,185,129,0.25)]">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                    {project.stats}
+                  </span>
+                )}
+              </div>
               <p className="text-sm sm:text-base text-white/80 leading-relaxed max-w-3xl drop-shadow-md font-mono">
                 {project.description}
               </p>
