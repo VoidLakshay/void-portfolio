@@ -42,12 +42,15 @@ export const metadata: Metadata = {
     type: "website",
   },
 
-  twitter: {
-    card: "summary_large_image",
-    title: "Lakshay Vashisth | Full-Stack Developer",
-    description:
-      "Explore my portfolio, projects, and skills in modern web development.",
-  },
+  
+twitter: {
+  card: "summary_large_image",
+  title: "Lakshay Vashisth | Full-Stack Developer",
+  description:
+    "Explore my portfolio, projects, and skills in modern web development.",
+  images: ["/opengraph-image.png"],
+},
+
 
   robots: {
     index: true,
