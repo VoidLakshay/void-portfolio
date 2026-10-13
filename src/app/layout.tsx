@@ -46,8 +46,7 @@ export const metadata: Metadata = {
 twitter: {
   card: "summary_large_image",
   title: "Lakshay Vashisth | Full-Stack Developer",
-  description:
-    "Explore my portfolio, projects, and skills in modern web development.",
+  description: "Explore my portfolio, projects, and skills in modern web development.",
   images: ["/opengraph-image.png"],
 },
 
