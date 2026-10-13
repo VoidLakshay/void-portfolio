@@ -14,16 +14,47 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 });
 
+
 export const metadata: Metadata = {
+  metadataBase: new URL("https://void-portfolio-phi.vercel.app"),
+
   title: {
-    default: siteConfig.name,
-    template: `%s | ${siteConfig.name}`,
+    default: "Lakshay Vashisth | Full-Stack Developer",
+    template: "%s | Lakshay Vashisth",
   },
-  description: siteConfig.description,
+
+  description:
+    "I'm Lakshay Vashisth, a developer building modern web applications with Next.js, React, TypeScript, and Node.js. Explore my projects and skills.",
+
+  applicationName: "Lakshay Vashisth Portfolio",
+
   icons: {
-    icon: '/favicon.ico',
+    icon: "/favicon.ico",
+  },
+
+  openGraph: {
+    title: "Lakshay Vashisth | Full-Stack Developer",
+    description:
+      "Explore my projects, technical skills, and work in modern web development.",
+    url: "https://void-portfolio-phi.vercel.app/",
+    siteName: "Lakshay Vashisth Portfolio",
+    locale: "en_US",
+    type: "website",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Lakshay Vashisth | Full-Stack Developer",
+    description:
+      "Explore my portfolio, projects, and skills in modern web development.",
+  },
+
+  robots: {
+    index: true,
+    follow: true,
   },
 };
+
 
 import { ScrollProgress } from '@/components/ui/scroll-progress';
 import { ThemeProvider } from 'next-themes';
