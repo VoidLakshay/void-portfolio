@@ -33,15 +33,15 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title: "Lakshay Vashisth | Full-Stack Developer",
-    description:
-      "Explore my projects, technical skills, and work in modern web development.",
-    url: "https://void-portfolio-phi.vercel.app/",
-    siteName: "Lakshay Vashisth Portfolio",
-    locale: "en_US",
-    type: "website",
-  },
-
+  title: "Lakshay Vashisth | Full-Stack Developer",
+  description:
+    "Explore my projects, technical skills, and work in modern web development.",
+  url: "https://void-portfolio-phi.vercel.app/",
+  siteName: "Lakshay Vashisth Portfolio",
+  locale: "en_US",
+  type: "website",
+  images: ["/opengraph-image.png"],
+},
   
 twitter: {
   card: "summary_large_image",
